@@ -13,6 +13,7 @@ import {
   Palette,
   Sun,
 } from "lucide-react";
+import useMounted from "@/hooks/useMounted";
 
 // TODO: pick another icon for git
 const THEME_ICONS: Record<string, React.ReactNode> = {
@@ -25,7 +26,7 @@ const THEME_ICONS: Record<string, React.ReactNode> = {
 
 export default function ThemeSelectorComponent() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted()
   const { theme, setTheme } = useCodeEditorStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currentTheme = THEMES.find((t) => t.id === theme);
@@ -44,10 +45,6 @@ export default function ThemeSelectorComponent() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  useEffect(() => {
-    setMounted(true);
-  }, [isOpen]);
 
   if (!mounted) return null;
 
