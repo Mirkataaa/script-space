@@ -14,6 +14,7 @@ import {
   Sun,
 } from "lucide-react";
 
+// TODO: pick another icon for git
 const THEME_ICONS: Record<string, React.ReactNode> = {
   "vs-dark": <Moon className="size-4" />,
   "vs-light": <Sun className="size-4" />,
@@ -75,6 +76,7 @@ export default function ThemeSelectorComponent() {
         />
       </motion.button>
 
+      {/* TODO: fix animation */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
