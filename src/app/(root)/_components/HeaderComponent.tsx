@@ -22,32 +22,34 @@ export default async function HeaderComponent() {
   return (
     <div className="relative z-10">
       <div
-        className="flex items-center lg:justify-between justify-center 
-      bg-[#B7B3A1]/80 backdrop-blur-xl p-6 mb-4 rounded-lg
-      border border-[#D1CA98]/50 shadow-md"
+        className="flex items-center lg:justify-between justify-center
+        bg-gradient-to-r from-[#0F172A]/95 via-[#1E1B4B]/90 to-[#0F172A]/95 
+        backdrop-blur-xl p-6 mb-4 rounded-lg
+        border border-[#334155]/60 shadow-lg shadow-indigo-900/20"
       >
+        {/* Left side (Logo + Navigation) */}
         <div className="hidden lg:flex items-center gap-8">
           <Link href="/" className="flex items-center gap-3 group relative">
             <div
-              className="absolute -inset-2 bg-gradient-to-r from-[#F7F06D]/30 to-[#EDBF85]/30
-            rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"
+              className="absolute -inset-2 bg-gradient-to-r from-indigo-500/20 to-fuchsia-500/20
+              rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"
             />
             <div
-              className="relative bg-gradient-to-br from-[#D1CA98] to-[#B7B3A1] p-2 rounded-xl 
-            ring-1 ring-[#EDBF85]/40 group-hover:ring-[#F7F06D]/60 transition-all"
+              className="relative bg-gradient-to-br from-indigo-500 to-fuchsia-600 p-2 rounded-xl 
+              ring-1 ring-fuchsia-500/40 group-hover:ring-indigo-400/60 transition-all"
             >
-              <Blocks className="size-6 text-[#FFB140] transform -rotate-6 group-hover:rotate-0 transition-transform duration-500" />
+              <Blocks className="size-6 text-violet-200 transform -rotate-6 group-hover:rotate-0 transition-transform duration-500" />
             </div>
 
             <div className="flex flex-col">
               <span
                 className="block text-lg font-semibold 
-              bg-gradient-to-r from-[#F7F06D] via-[#EDBF85] to-[#FFB140]
-              text-transparent bg-clip-text"
+                bg-gradient-to-r from-indigo-300 via-fuchsia-400 to-pink-400
+                text-transparent bg-clip-text"
               >
                 ScriptSpace
               </span>
-              <span className="block text-xs text-[#D1CA98]/80 font-medium">
+              <span className="block text-xs text-slate-400 font-medium">
                 Interactive Code Editor
               </span>
             </div>
@@ -57,24 +59,26 @@ export default async function HeaderComponent() {
             <Link
               href="/snippets"
               className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg 
-            text-[#B7B3A1] bg-[#D1CA98]/50 hover:bg-[#EDBF85]/30
-            border border-[#B7B3A1]/70 hover:border-[#F7F06D]/50
-            transition-all duration-300 shadow-lg overflow-hidden"
+              text-slate-300 bg-slate-800/40 hover:bg-indigo-900/40
+              border border-slate-700 hover:border-indigo-600
+              transition-all duration-300 shadow-md overflow-hidden"
             >
               <div
-                className="absolute inset-0 bg-gradient-to-r from-[#F7F06D]/20 to-[#FFB140]/20
-              opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-fuchsia-500/10
+                opacity-0 group-hover:opacity-100 transition-opacity"
               />
-              <Code2 className="w-4 h-4 relative z-10 text-[#D1CA98] group-hover:text-[#B7B3A1] transition-transform transform group-hover:rotate-3" />
+              <Code2 className="w-4 h-4 relative z-10 text-indigo-300 group-hover:text-fuchsia-400 transition-transform transform group-hover:rotate-3" />
               <span
                 className="text-sm font-medium relative z-10
-              group-hover:text-[#B7B3A1] transition-colors"
+                group-hover:text-fuchsia-300 transition-colors"
               >
                 Snippets
               </span>
             </Link>
           </nav>
         </div>
+
+        {/* Right side (Controls + Buttons) */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <ThemeSelectorComponent />
