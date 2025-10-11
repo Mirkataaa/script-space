@@ -9,7 +9,7 @@ import { motion } from "motion/react";
 import { Editor } from "@monaco-editor/react";
 import { useClerk } from "@clerk/nextjs";
 import useMounted from "@/hooks/useMounted";
-import EditorSkeletonComponent from "./EditorSkeletonComponent";
+import { EditorSkeletonComponent } from "./EditorSkeletonComponent";
 
 export default function EditorPanelComponent() {
   const [isShareOpen, setIsShareOpen] = useState(false);
