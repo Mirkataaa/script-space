@@ -9,7 +9,7 @@ import {
   Terminal,
 } from "lucide-react";
 import { useState } from "react";
-import { OutputSkeleten } from "./EditorSkeletonComponent";
+import { RunningCodeSkeleton } from "./EditorSkeletonComponent";
 
 export default function OutputPanelComponent() {
   const { output, error, isRunning } = useCodeEditorStore();
@@ -67,7 +67,7 @@ export default function OutputPanelComponent() {
         rounded-xl p-4 h-[600px] overflow-auto font-mono text-sm"
         >
           {isRunning ? (
-            <OutputSkeleten />
+            <RunningCodeSkeleton />
           ) : error ? (
             <div className="flex items-start gap-3 text-red-400">
               <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-1" />
