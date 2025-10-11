@@ -8,12 +8,15 @@ import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { Editor } from "@monaco-editor/react";
 import { useClerk } from "@clerk/nextjs";
+import useMounted from "@/hooks/useMounted";
+import EditorSkeletonComponent from "./EditorSkeletonComponent";
 
 export default function EditorPanelComponent() {
   const [isShareOpen, setIsShareOpen] = useState(false);
   const { language, theme, fontSize, editor, setFontSize, setEditor } =
     useCodeEditorStore();
   const clerk = useClerk();
+  const mounted = useMounted();
 
   // load saved code from local storage
   useEffect(() => {
@@ -30,11 +33,26 @@ export default function EditorPanelComponent() {
     if (savedFont) setFontSize(parseInt(savedFont));
   }, [setFontSize]);
 
-  const handleRefresh = () => {};
+  const handleRefresh = () => {
+    const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
 
-  const handleEditorChange = () => {};
+    if (editor) editor.setValue(defaultCode);
 
-  const handleFontSizeChange = (fontSize: number) => {};
+    localStorage.removeItem(`editor-code-${language}`);
+  };
+
+  //  this value is coming out of the box with Monaco
+  const handleEditorChange = (value: string | undefined) => {
+    if (value) localStorage.setItem(`editor-language-${language}`, value);
+  };
+
+  const handleFontSizeChange = (fontSize: number) => {
+    const size = Math.min(Math.max(fontSize, 12), 24);
+    setFontSize(size);
+    localStorage.setItem("editor-font-size", size.toString());
+  };
+
+  if (!mounted) return null;
 
   return (
     <div className="relative">
@@ -101,41 +119,40 @@ export default function EditorPanelComponent() {
         </div>
 
         {/* editor */}
-
         <div className="relative group rounded-xl overflow-hidden ring-1 ring-white/[0.05]">
           {clerk.loaded && (
             <Editor
-            height="600px"
-            language={LANGUAGE_CONFIG[language].monacoLanguage}
-            onChange={handleEditorChange}
-            theme={theme}
-            beforeMount={defineMonacoThemes}
-            onMount={(editor) => setEditor(editor)}
-            options={{
-              minimap: { enabled: true },
-              fontSize,
-              automaticLayout: true,
-              scrollBeyondLastLine: false,
-              padding: { top: 16, bottom: 16 },
-              renderWhitespace: "selection",
-              fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
-              fontLigatures: true,
-              cursorBlinking: "smooth",
-              smoothScrolling: true,
-              contextmenu: true,
-              renderLineHighlight: "all",
-              lineHeight: 1.6,
-              letterSpacing: 0.5,
-              roundedSelection: true,
-              scrollbar: {
-                verticalScrollbarSize: 5,
-                horizontalScrollbarSize: 5,
-              },
-            }}
-          />
+              height="600px"
+              language={LANGUAGE_CONFIG[language].monacoLanguage}
+              onChange={handleEditorChange}
+              theme={theme}
+              beforeMount={defineMonacoThemes}
+              onMount={(editor) => setEditor(editor)}
+              options={{
+                minimap: { enabled: true },
+                fontSize,
+                automaticLayout: true,
+                scrollBeyondLastLine: false,
+                padding: { top: 16, bottom: 16 },
+                renderWhitespace: "selection",
+                fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
+                fontLigatures: true,
+                cursorBlinking: "smooth",
+                smoothScrolling: true,
+                contextmenu: true,
+                renderLineHighlight: "all",
+                lineHeight: 1.6,
+                letterSpacing: 0.5,
+                roundedSelection: true,
+                scrollbar: {
+                  verticalScrollbarSize: 5,
+                  horizontalScrollbarSize: 5,
+                },
+              }}
+            />
           )}
 
-          {/* {!clerk.loaded && <EditorSceletonComponent />} */}
+          {!clerk.loaded && <EditorSkeletonComponent />}
         </div>
       </div>
     </div>
