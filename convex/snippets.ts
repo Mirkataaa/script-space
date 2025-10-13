@@ -44,6 +44,22 @@ export const getSnippets = query({
   },
 });
 
+export const getSnippetById = query({
+  args: {
+    snippetId: v.id("snippets"),
+  },
+
+  handler: async (ctx, args) => {
+    const snippet = await ctx.db.get(args.snippetId);
+
+    if (!snippet) {
+      throw new Error("Snippet not found");
+    }
+
+    return snippet;
+  },
+});
+
 export const deleteSnippet = mutation({
   args: {
     snippetId: v.id("snippets"),
