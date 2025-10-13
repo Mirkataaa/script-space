@@ -5,9 +5,10 @@ import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
 import NavigationHeaderComponent from "@/components/NavigationHeaderComponent";
 import SnippetsPageSkeletonComponent from "./_components/SnippetsPageSkeletonComponent";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { BookOpen, Grid, Layers, Search, Tag, X } from "lucide-react";
 import Image from "next/image";
+import SnippetCardComponent from "./_components/SnippetCardComponent";
 
 export default function SnippetsPage() {
   const snippets = useQuery(api.snippets.getSnippets);
@@ -171,7 +172,23 @@ export default function SnippetsPage() {
             </div>
           </div>
         </div>
-        
+
+        {/* snippets grid */}
+          <motion.div
+          className={`grid gap-6 ${
+            view === "grid"
+              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              : "grid-cols-1 max-w-3xl mx-auto"
+          }`}
+          layout
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredSnippets.map((snippet) => (
+              <SnippetCardComponent key={snippet._id} snippet={snippet} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
       </div>
     </div>
   );
