@@ -4,12 +4,13 @@ import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
-import SnippetLoadingSkeletenComponent from "../_components/SnippetLoadingSkeletenComponent";
+import SnippetLoadingSkeletenComponent from "./_components/SnippetLoadingSkeletenComponent";
 import NavigationHeaderComponent from "@/components/NavigationHeaderComponent";
 import Image from "next/image";
 import { Clock, Code, MessageSquare, User } from "lucide-react";
 import { Editor } from "@monaco-editor/react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "@/app/(root)/_constants";
+import CopyButtonComponent from "./_components/CopyButtonComponent";
 
 export default function SnippetsDetailPagePage() {
   const snippetId = useParams().id;
@@ -77,7 +78,8 @@ export default function SnippetsDetailPagePage() {
                 <Code className="w-4 h-4" />
                 <span className="text-sm font-medium">Source Code</span>
               </div>
-              {/* coppy button here */}
+
+              <CopyButtonComponent code={snippet.code} />
             </div>
             <Editor
               height="600px"
