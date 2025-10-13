@@ -6,8 +6,9 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, StarIcon, Trash2, User } from "lucide-react";
+import { Clock, Trash2, User } from "lucide-react";
 import toast from "react-hot-toast";
+import StarButtonComponent from "@/components/StarButtonComponent";
 
 export default function SnippetCardComponent({
   snippet,
@@ -80,8 +81,7 @@ export default function SnippetCardComponent({
                 className="absolute top-5 right-5 z-10 flex gap-4 items-center"
                 onClick={(e) => e.preventDefault()}
               >
-                {/* TODO: add star button here later */}
-                <StarIcon />
+                <StarButtonComponent snippetId={snippet._id} />
 
                 {user?.id === snippet.userId && (
                   <div className="z-10" onClick={(e) => e.preventDefault()}>

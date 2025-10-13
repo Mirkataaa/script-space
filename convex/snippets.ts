@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { q } from "motion/react-client";
 
 export const createSnippet = mutation({
   args: {
