@@ -4,6 +4,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
 import NavigationHeaderComponent from "@/components/NavigationHeaderComponent";
+import SnippetsPageSkeletonComponent from "./_components/SnippetsPageSkeletonComponent";
 
 export default function SnippetsPage() {
   const snippets = useQuery(api.snippets.getSnippets);
@@ -11,11 +12,11 @@ export default function SnippetsPage() {
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
   const [view, setView] = useState<"grid" | "list">("grid");
 
-  if (snippets === undefined) {
+  if (true) {
     return (
       <div className="min-h-screen">
         <NavigationHeaderComponent />
-        {/* add skeleton here */}
+        <SnippetsPageSkeletonComponent />
       </div>
     );
   }
