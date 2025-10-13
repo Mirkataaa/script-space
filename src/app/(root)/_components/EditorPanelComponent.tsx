@@ -10,6 +10,7 @@ import { Editor } from "@monaco-editor/react";
 import { useClerk } from "@clerk/nextjs";
 import useMounted from "@/hooks/useMounted";
 import { EditorSkeletonComponent } from "./EditorSkeletonComponent";
+import ShareSnippetComponent from "./ShareSnippetComponent";
 
 export default function EditorPanelComponent() {
   const [isShareOpen, setIsShareOpen] = useState(false);
@@ -155,6 +156,8 @@ export default function EditorPanelComponent() {
           {!clerk.loaded && <EditorSkeletonComponent />}
         </div>
       </div>
+
+      {isShareOpen && <ShareSnippetComponent onClose={() => setIsShareOpen(false)} /> }
     </div>
   );
 }
