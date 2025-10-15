@@ -113,7 +113,7 @@ export const getUserStats = query({
       : "N/A";
 
     return {
-      totalExecutons: executions.length,
+      totalExecutions: executions.length,
       languagesCount: languages.length,
       languages,
       last24Hours,
