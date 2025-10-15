@@ -10,6 +10,18 @@ export default function CommentFormComponent({
   const [comment, setComment] = useState("");
   const [isPreview, setIsPreview] = useState(false);
 
+  // handle tab
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const start = e.currentTarget.selectionStart;
+      const end = e.currentTarget.selectionEnd;
+      const newComment = comment.substring(0, start) + "  " + comment.substring(end);
+      setComment(newComment);
+      e.currentTarget.selectionStart = e.currentTarget.selectionEnd = start + 2;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -47,6 +59,7 @@ export default function CommentFormComponent({
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Add to the discussion..."
             className="w-full bg-transparent border-0 text-[#e1e1e3] placeholder:text-[#808086] outline-none 
             resize-none min-h-[120px] p-4 font-mono text-sm"

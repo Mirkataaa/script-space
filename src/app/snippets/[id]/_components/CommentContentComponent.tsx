@@ -1,3 +1,5 @@
+import CodeBlockComponent from "./CodeBlockComponent";
+
 export default function CommentContentComponent({
   content,
 }: {
@@ -13,9 +15,10 @@ export default function CommentContentComponent({
           const match = part.match(/```([\w-]*)\n([\s\S]*?)\n```/);
 
           if (match) {
-            const [language, code] = match;
-            // replace with code block comp
-            return <div key={i}>{language} {code}</div>;
+            const [, language, code] = match;
+            return (
+              <CodeBlockComponent language={language} code={code} key={i} />
+            );
           }
         }
 
