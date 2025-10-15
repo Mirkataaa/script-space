@@ -238,7 +238,7 @@ export const deleteComment = mutation({
       throw new Error("Comment not found");
     }
 
-    if (comment.userId === identity.subject) {
+    if (comment.userId !== identity.subject) {
       throw new Error("Not authorized to delete this comment");
     }
 

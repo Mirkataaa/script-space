@@ -73,6 +73,15 @@ export default function CommentFormComponent({
               <CodeIcon className="w-3.5 h-3.5" />
             </div>
           </div>
+          <div className="hidden sm:block text-xs text-[#808086] space-y-1">
+            <div className="flex items-center gap-2">
+              <CodeIcon className="w-3.5 h-3.5" />
+              <span>Format code with ```language</span>
+            </div>
+            <div className="text-[#808086]/60 pl-5">
+              Tab key inserts spaces • Preview your comment before posting
+            </div>
+          </div>
           <button
             type="submit"
             disabled={isSubmitting || !comment.trim()}
