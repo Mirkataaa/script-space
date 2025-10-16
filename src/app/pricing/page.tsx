@@ -3,7 +3,10 @@ import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../convex/_generated/api";
 import PremiumPlanViewComponent from "./_components/PremiumPlanViewComponent";
 import NavigationHeaderComponent from "@/components/NavigationHeaderComponent";
-import { ENTERPRISE_FEATURES } from "./_constants";
+import { ENTERPRISE_FEATURES, FEATURES } from "./_constants";
+import { Star } from "lucide-react";
+import FeatureCategoryComponent from "./_components/FeatureCategoryComponent";
+import FeatureItemComponent from "./_components/FeatureItemComponent";
 
 export default async function PricingPage() {
   const user = await currentUser();
@@ -44,7 +47,7 @@ export default async function PricingPage() {
           </div>
 
           {/* enterprise features */}
-           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
             {ENTERPRISE_FEATURES.map((feature) => (
               <div
                 key={feature.label}
@@ -58,11 +61,77 @@ export default async function PricingPage() {
                     <feature.icon className="w-6 h-6 text-blue-400" />
                   </div>
 
-                  <h3 className="text-lg font-medium text-white mb-2">{feature.label}</h3>
+                  <h3 className="text-lg font-medium text-white mb-2">
+                    {feature.label}
+                  </h3>
                   <p className="text-gray-400">{feature.desc}</p>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* pricing card */}
+          <div className="relative max-w-4xl mx-auto">
+            <div
+              className="absolute -inset-px bg-gradient-to-r from-blue-500
+             to-purple-500 rounded-2xl blur opacity-10"
+            />
+            <div className="relative bg-[#12121a]/90 backdrop-blur-xl rounded-2xl">
+              <div
+                className="absolute inset-x-0 -top-px h-px bg-gradient-to-r 
+              from-transparent via-blue-500/50 to-transparent"
+              />
+              <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+
+              <div className="relative p-8 md:p-12">
+                {/* header */}
+                <div className="text-center mb-12">
+                  <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 ring-1 ring-gray-800/60 mb-6">
+                    <Star className="w-8 h-8 text-blue-400" />
+                  </div>
+                  <h2 className="text-3xl font-semibold text-white mb-4">
+                    Lifetime Premium Access
+                  </h2>
+                  <div className="flex items-baseline justify-center gap-2 mb-4">
+                    <span className="text-2xl text-gray-400">$</span>
+                    <span className="text-6xl font-semibold bg-gradient-to-r from-gray-100 to-gray-300 text-transparent bg-clip-text">
+                      39
+                    </span>
+                    <span className="text-xl text-gray-400">one-time</span>
+                  </div>
+                  <p className="text-gray-400 text-lg">
+                    Unlock the full potential
+                  </p>
+                </div>
+
+                {/* features */}
+                <div className="grid md:grid-cols-3 gap-12 mb-12">
+                  <FeatureCategoryComponent label="Development">
+                    {FEATURES.development.map((feature, idx) => (
+                      <FeatureItemComponent key={idx}>
+                        {feature}
+                      </FeatureItemComponent>
+                    ))}
+                  </FeatureCategoryComponent>
+
+                  <FeatureCategoryComponent label="Collaboration">
+                    {FEATURES.collaboration.map((feature, idx) => (
+                      <FeatureItemComponent key={idx}>
+                        {feature}
+                      </FeatureItemComponent>
+                    ))}
+                  </FeatureCategoryComponent>
+
+                  <FeatureCategoryComponent label="Deployment">
+                    {FEATURES.deployment.map((feature, idx) => (
+                      <FeatureItemComponent key={idx}>
+                        {feature}
+                      </FeatureItemComponent>
+                    ))}
+                  </FeatureCategoryComponent>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>

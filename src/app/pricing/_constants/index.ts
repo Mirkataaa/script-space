@@ -22,3 +22,24 @@ export const ENTERPRISE_FEATURES = [
     desc: "Effortlessly store and access unlimited snippets, assets, and projects.",
   },
 ];
+
+export const FEATURES = {
+  development: [
+    "AI-assisted code generation",
+    "Customizable UI themes",
+    "Built-in performance profiler",
+    "Multi-language project support",
+  ],
+  collaboration: [
+    "Real-time coding sessions",
+    "Shared team dashboards",
+    "Git and branch management",
+    "In-app code reviews & comments",
+  ],
+  deployment: [
+    "Instant cloud deployment",
+    "CI/CD pipeline automation",
+    "Docker & Kubernetes support",
+    "Custom domain and SSL setup",
+  ],
+};
