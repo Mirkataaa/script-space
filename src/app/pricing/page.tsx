@@ -7,6 +7,9 @@ import { ENTERPRISE_FEATURES, FEATURES } from "./_constants";
 import { Star } from "lucide-react";
 import FeatureCategoryComponent from "./_components/FeatureCategoryComponent";
 import FeatureItemComponent from "./_components/FeatureItemComponent";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import LoginButtonComponent from "@/components/LoginButtonComponent";
+import UpgradeButtonComponent from "./_components/UpgradeButtonComponent";
 
 export default async function PricingPage() {
   const user = await currentUser();
@@ -95,7 +98,7 @@ export default async function PricingPage() {
                   <div className="flex items-baseline justify-center gap-2 mb-4">
                     <span className="text-2xl text-gray-400">$</span>
                     <span className="text-6xl font-semibold bg-gradient-to-r from-gray-100 to-gray-300 text-transparent bg-clip-text">
-                      39
+                      25.99
                     </span>
                     <span className="text-xl text-gray-400">one-time</span>
                   </div>
@@ -129,6 +132,16 @@ export default async function PricingPage() {
                       </FeatureItemComponent>
                     ))}
                   </FeatureCategoryComponent>
+                </div>
+
+                <div className="flex justify-center">
+                  <SignedIn>
+                    <UpgradeButtonComponent />
+                  </SignedIn>
+
+                  <SignedOut>
+                    <LoginButtonComponent />
+                  </SignedOut>
                 </div>
               </div>
             </div>
