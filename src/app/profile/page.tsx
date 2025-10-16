@@ -11,6 +11,8 @@ import { ChevronRight, Code, ListVideo, Loader2, Star } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import CodeBlockComponent from "./_components/CodeBlockComponent";
+
 
 const TABS = [
   {
@@ -175,7 +177,22 @@ export default function ProfilePage() {
                         </div>
                       </div>
 
-                      {/* code blok component here */}
+                       <div className="p-4 bg-black/20 rounded-b-xl border border-t-0 border-gray-800/50">
+                        <CodeBlockComponent code={execution.code} language={execution.language} />
+
+                        {(execution.output || execution.error) && (
+                          <div className="mt-4 p-4 rounded-lg bg-black/40">
+                            <h4 className="text-sm font-medium text-gray-400 mb-2">Output</h4>
+                            <pre
+                              className={`text-sm ${
+                                execution.error ? "text-red-400" : "text-green-400"
+                              }`}
+                            >
+                              {execution.error || execution.output}
+                            </pre>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ))}
 
