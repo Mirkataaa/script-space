@@ -7,7 +7,7 @@ import { api } from "../../../convex/_generated/api";
 import ProfileHeaderComponent from "./_components/ProfileHeaderComponent";
 import NavigationHeaderComponent from "@/components/NavigationHeaderComponent";
 import ProfileHeaderSkeletonComponent from "./_components/ProfileHeaderSkeletonComponent";
-import { Code, ListVideo, Loader2, Star } from "lucide-react";
+import { ChevronRight, Code, ListVideo, Loader2, Star } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
@@ -50,6 +50,12 @@ export default function ProfilePage() {
     { userId: user?.id ?? "" },
     { initialNumItems: 5 }
   );
+
+  const handleLoadMore = () => {
+    if (executionStatus === "CanLoadMore") {
+      loadMore(5);
+    }
+  };
 
   if (!user && isLoaded) return router.push("/");
   return (
@@ -169,7 +175,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
 
-                              {/* code blok component here */}
+                      {/* code blok component here */}
                     </div>
                   ))}
 
@@ -192,6 +198,20 @@ export default function ProfilePage() {
                         </p>
                       </div>
                     )
+                  )}
+
+                  {/* Load More Button */}
+                  {executionStatus === "CanLoadMore" && (
+                    <div className="flex justify-center mt-8">
+                      <button
+                        onClick={handleLoadMore}
+                        className="px-6 py-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg flex items-center gap-2 
+                        transition-colors"
+                      >
+                        Load More
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   )}
                 </div>
               )}
