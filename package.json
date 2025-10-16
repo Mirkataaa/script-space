@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.33.3",
     "@monaco-editor/react": "^4.7.0",
+    "canvas-confetti": "^1.9.3",
     "convex": "^1.27.4",
     "lucide-react": "^0.545.0",
     "monaco-editor": "^0.54.0",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
