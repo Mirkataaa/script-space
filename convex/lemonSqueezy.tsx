@@ -5,7 +5,7 @@ import { internalAction } from "./_generated/server";
 import { createHmac } from "crypto";
 
 function verifySignature(payload: string, signature: string): boolean {
-  const hmac = createHmac("sha256", process.env.LEMON_SQUEEZY_WEBHOOK_SECRET!);
+  const hmac = createHmac("sha256", process.env.LEMON_SQUEEZY_SECRET!);
   const computedSignature = hmac.update(payload).digest("hex");
   return signature === computedSignature;
 }
